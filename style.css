@@ -1,3 +1,21 @@
+:root {
+    --bg-color: #f0f2f5;
+    --card-bg: #ffffff;
+    --text-color: #333333;
+    --btn-bg: #007bff;
+    --btn-hover: #0056b3;
+    --shadow: rgba(0, 0, 0, 0.1);
+}
+
+body.dark-mode {
+    --bg-color: #1a1a1a;
+    --card-bg: #2d2d2d;
+    --text-color: #f0f2f5;
+    --btn-bg: #375a7f;
+    --btn-hover: #4b7eb3;
+    --shadow: rgba(0, 0, 0, 0.4);
+}
+
 body {
     font-family: 'Poppins', sans-serif;
     display: flex;
@@ -5,19 +23,27 @@ body {
     align-items: center;
     height: 100vh;
     margin: 0;
-    background-color: #f0f2f5;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    transition: background-color 0.3s, color 0.3s;
 }
 
 .container {
+    position: relative;
     text-align: center;
     padding: 40px;
+}
+
+.card {
+    background-color: var(--card-bg);
+    padding: 40px;
     border-radius: 20px;
-    background-color: #ffffff;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 10px 30px var(--shadow);
+    transition: background-color 0.3s, box-shadow 0.3s;
 }
 
 h1 {
-    color: #333;
+    color: var(--text-color);
     margin-bottom: 30px;
 }
 
@@ -26,6 +52,7 @@ h1 {
     justify-content: center;
     gap: 15px;
     margin-bottom: 40px;
+    min-height: 60px;
 }
 
 .lotto-ball {
@@ -39,14 +66,15 @@ h1 {
     font-weight: 600;
     color: #fff;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-    transition: transform 0.2s ease-in-out;
+    transform: scale(0);
+    animation: pop-in 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
 }
 
 .generate-btn {
     padding: 15px 30px;
     border: none;
     border-radius: 10px;
-    background-color: #007bff;
+    background-color: var(--btn-bg);
     color: #fff;
     font-size: 18px;
     font-weight: 600;
@@ -56,7 +84,7 @@ h1 {
 }
 
 .generate-btn:hover {
-    background-color: #0056b3;
+    background-color: var(--btn-hover);
     transform: translateY(-2px);
 }
 
@@ -64,25 +92,24 @@ h1 {
     transform: translateY(0);
 }
 
-/* Color ranges for lotto balls */
-.ball-yellow { background-color: #fbc400; }
-.ball-blue { background-color: #69c8f2; }
-.ball-red { background-color: #ff7171; }
-.ball-gray { background-color: #aaaaaa; }
-.ball-green { background-color: #b0d840; }
+.theme-toggle {
+    position: absolute;
+    top: -20px;
+    right: 0;
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    padding: 10px;
+    transition: transform 0.2s;
+}
 
-/* Animation */
-.lotto-ball {
-    animation: pop-in 0.5s ease-out forwards;
+.theme-toggle:hover {
+    transform: scale(1.1);
 }
 
 @keyframes pop-in {
-    0% {
-        transform: scale(0.5);
-        opacity: 0;
-    }
-    100% {
+    to {
         transform: scale(1);
-        opacity: 1;
     }
 }

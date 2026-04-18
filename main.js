@@ -1,6 +1,22 @@
 document.addEventListener('DOMContentLoaded', () => {
     const lottoDisplay = document.querySelector('.lotto-display');
     const generateBtn = document.querySelector('.generate-btn');
+    const themeToggle = document.getElementById('theme-toggle');
+    const body = document.body;
+
+    // Theme Toggle Logic
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'dark') {
+        body.classList.add('dark-mode');
+        themeToggle.textContent = '☀️';
+    }
+
+    themeToggle.addEventListener('click', () => {
+        body.classList.toggle('dark-mode');
+        const isDarkMode = body.classList.contains('dark-mode');
+        themeToggle.textContent = isDarkMode ? '☀️' : '🌙';
+        localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
+    });
 
     const getNumberColor = (number) => {
         if (number <= 10) return '#fbc400'; // 노란색
@@ -24,11 +40,11 @@ document.addEventListener('DOMContentLoaded', () => {
         numbers.forEach((number, index) => {
             setTimeout(() => {
                 const numberElement = document.createElement('div');
-                numberElement.classList.add('lotto-number');
+                numberElement.classList.add('lotto-ball');
                 numberElement.textContent = number;
                 numberElement.style.backgroundColor = getNumberColor(number);
                 lottoDisplay.appendChild(numberElement);
-            }, index * 100); // 순차적으로 나타나는 애니메이션 효과
+            }, index * 100);
         });
     };
 
@@ -37,7 +53,7 @@ document.addEventListener('DOMContentLoaded', () => {
         displayNumbers(newNumbers);
     });
 
-    // 페이지 로드 시 초기 번호 생성
+    // Initial load
     const initialNumbers = generateLottoNumbers();
     displayNumbers(initialNumbers);
 });
