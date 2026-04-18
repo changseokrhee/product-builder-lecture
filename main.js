@@ -8,13 +8,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const savedTheme = localStorage.getItem('theme');
     if (savedTheme === 'dark') {
         body.classList.add('dark-mode');
-        themeToggle.textContent = '☀️';
+        themeToggle.textContent = '화이트모드';
     }
 
     themeToggle.addEventListener('click', () => {
         body.classList.toggle('dark-mode');
         const isDarkMode = body.classList.contains('dark-mode');
-        themeToggle.textContent = isDarkMode ? '☀️' : '🌙';
+        themeToggle.textContent = isDarkMode ? '화이트모드' : '다크모드';
         localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
     });
 
